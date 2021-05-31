@@ -56,6 +56,7 @@ namespace DarkNotepad
             this.fontColorDialog = new System.Windows.Forms.ColorDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.초기화RtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.파일FcontextMenuStrip.SuspendLayout();
             this.편집EcontextMenuStrip.SuspendLayout();
@@ -182,7 +183,6 @@ namespace DarkNotepad
             this.서식OcontextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.글꼴FtoolStripMenuItem});
             this.서식OcontextMenuStrip.Name = "서식OcontextMenuStrip";
-            this.서식OcontextMenuStrip.OwnerItem = this.서식OtoolStripMenuItem;
             this.서식OcontextMenuStrip.Size = new System.Drawing.Size(133, 32);
             this.서식OcontextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.서식OcontextMenuStrip_ItemClicked);
             // 
@@ -206,10 +206,10 @@ namespace DarkNotepad
             this.보기VcontextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.상태표시줄StoolStripMenuItem,
             this.배경색BtoolStripMenuItem,
-            this.글씨색FtoolStripMenuItem});
+            this.글씨색FtoolStripMenuItem,
+            this.초기화RtoolStripMenuItem});
             this.보기VcontextMenuStrip.Name = "보기VcontextMenuStrip";
-            this.보기VcontextMenuStrip.OwnerItem = this.보기VtoolStripMenuItem;
-            this.보기VcontextMenuStrip.Size = new System.Drawing.Size(191, 88);
+            this.보기VcontextMenuStrip.Size = new System.Drawing.Size(191, 116);
             this.보기VcontextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.보기VcontextMenuStrip_ItemClicked);
             // 
             // 상태표시줄StoolStripMenuItem
@@ -242,10 +242,17 @@ namespace DarkNotepad
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox1.Size = new System.Drawing.Size(410, 229);
             this.textBox1.TabIndex = 4;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // 초기화RtoolStripMenuItem
+            // 
+            this.초기화RtoolStripMenuItem.Name = "초기화RtoolStripMenuItem";
+            this.초기화RtoolStripMenuItem.Size = new System.Drawing.Size(190, 28);
+            this.초기화RtoolStripMenuItem.Text = "초기화(&R)";
             // 
             // Form1
             // 
@@ -259,6 +266,7 @@ namespace DarkNotepad
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -299,6 +307,7 @@ namespace DarkNotepad
         private System.Windows.Forms.ColorDialog fontColorDialog;
         private System.Windows.Forms.FontDialog fontDialog;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.ToolStripMenuItem 초기화RtoolStripMenuItem;
     }
 }
 

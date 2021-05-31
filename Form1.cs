@@ -17,16 +17,68 @@ namespace DarkNotepad
         {
             InitializeComponent();
 
+            this.Text = "Untitled";
             textBoxSetup();
         }
 
         private String fileName;
         private String filePath;
+        private bool modified = false;
 
         private void textBoxSetup()
         {
             textBox1.Location = new Point(0, 31);
             textBox1.Size = new Size(this.Size.Width-15, this.Size.Height-78);
+        }
+
+        private void saveFile(ToolStripItem item)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (filePath != null)
+            {
+                saveFileDialog.InitialDirectory = filePath;
+            }
+            else
+            {
+                saveFileDialog.InitialDirectory = @"C:\";
+            }
+            saveFileDialog.Filter = "텍스트 파일(*.txt)|*.txt|모든 파일(*.*)|*.*";
+            saveFileDialog.FilterIndex = 2;
+            saveFileDialog.RestoreDirectory = true;
+            if (fileName != null)
+            {
+                saveFileDialog.FileName = fileName;
+            }
+            else if (item == 저장StoolStripMenuItem)
+            {
+                saveFileDialog.FileName = "Untitled.txt";
+            }
+            else
+            {
+                saveFileDialog.FileName = ".txt";
+            }
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter writer = new StreamWriter(saveFileDialog.FileName, false, System.Text.Encoding.UTF8);
+                if (writer != null)
+                {
+                    try
+                    {
+                        writer.WriteLine(textBox1.Text);
+                        this.Text = saveFileDialog.FileName.Split("\\").Last();
+                        modified = false;
+                    }
+                    catch
+                    {
+                        MessageBox.Show("cannot write");
+                    }
+                    finally
+                    {
+                        writer.Close();
+                    }
+                }
+            }
         }
 
         private void 파일FcontextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -59,49 +111,14 @@ namespace DarkNotepad
                         filePath = openFileDialog.FileName.Replace(fileName, "");
                         textBox1.Text = reader.ReadToEnd();
                         fileStream.Close();
+                        this.Text = fileName;
+                        modified = false;
                     }
                 }
             }
             else if (e.ClickedItem==저장StoolStripMenuItem || e.ClickedItem==다른이름으로저장AtoolStripMenuItem)
             {
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                if (filePath != null)
-                {
-                    saveFileDialog.InitialDirectory = filePath;
-                }
-                else
-                {
-                    saveFileDialog.InitialDirectory = @"C:\";
-                }
-                saveFileDialog.Filter = "텍스트 파일(*.txt)|*.txt|모든 파일(*.*)|*.*";
-                saveFileDialog.FilterIndex = 2;
-                saveFileDialog.RestoreDirectory = true;
-                if (e.ClickedItem == 저장StoolStripMenuItem)
-                {
-                    saveFileDialog.FileName = fileName;
-                }
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    StreamWriter sr = new StreamWriter(saveFileDialog.FileName, false, System.Text.Encoding.UTF8);
-                    if (sr != null)
-                    {
-                        // Code to write the stream goes here.
-                        try
-                        {
-                            //File.WriteAllText(saveFileDialog.FileName, textBox1.Text);
-                            sr.WriteLine(textBox1.Text);
-                        }
-                        catch
-                        {
-                            MessageBox.Show("cannot write");
-                        }
-                        finally
-                        {
-                            sr.Close();
-                        }
-                    }
-                }
+                saveFile(e.ClickedItem);
             }
             else if (e.ClickedItem == 끝내기XtoolStripMenuItem)
             {
@@ -127,6 +144,11 @@ namespace DarkNotepad
                 fontColorDialog.ShowDialog();
                 textBox1.ForeColor = fontColorDialog.Color;
             }
+            else if (e.ClickedItem == 초기화RtoolStripMenuItem)
+            {
+                textBox1.BackColor = Color.FromArgb(30, 30, 30);
+                textBox1.ForeColor = Color.FromArgb(212, 212, 212);
+            }
         }
 
         private void 서식OcontextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -145,9 +167,34 @@ namespace DarkNotepad
             textBoxSetup();
         }
 
-        private void menuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            if (modified == false)
+            {
+                this.Text = "*" + this.Text;
+                modified = true;
+            }
+        }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (modified == true)
+            {
+                DialogResult drg = MessageBox.Show("Save before exit?", "Notepad",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
+
+                if (drg == DialogResult.Yes)
+                {
+                    saveFile(null);
+                }
+                else if (drg == DialogResult.No) {}
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
         }
     }
 }
