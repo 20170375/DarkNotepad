@@ -28,6 +28,7 @@ namespace DarkNotepad
 
         private String fileName;
         private String filePath;
+        private bool opened = false;
         private bool modified = false;
 
         private void textBoxSetup()
@@ -38,64 +39,57 @@ namespace DarkNotepad
 
         private void openFile(string path)
         {
-            FileStream fileStream = File.OpenRead(path);
-            using (StreamReader reader = new StreamReader(fileStream))
+            using (StreamReader reader = new StreamReader(path))
             {
                 fileName = path.Split("\\").Last();
                 textBox1.Text = reader.ReadToEnd();
                 textBox1.Select(0, 0);
-                fileStream.Close();
+                reader.Close();
                 this.Text = fileName;
+                modified = false;
+                opened = true;
+            }
+        }
+
+        private void quickSaveFile()
+        {
+            if (opened == false)
+            {
+                saveFile();
+                return;
+            }
+
+            using (StreamWriter writer = new StreamWriter(filePath + fileName, false, System.Text.Encoding.UTF8))
+            {
+                writer.WriteLine(textBox1.Text);
+                this.Text = fileName;
+                opened = true;
                 modified = false;
             }
         }
 
-        private void saveFile(ToolStripItem item)
+        private void saveFile()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            if (filePath != null)
-            {
-                saveFileDialog.InitialDirectory = filePath;
-            }
-            else
-            {
-                saveFileDialog.InitialDirectory = @"C:\";
-            }
+
+            saveFileDialog.InitialDirectory = @"C:\";
+            if (filePath != null) { saveFileDialog.InitialDirectory = filePath; }
             saveFileDialog.Filter = "텍스트 파일(*.txt)|*.txt|모든 파일(*.*)|*.*";
             saveFileDialog.FilterIndex = 2;
             saveFileDialog.RestoreDirectory = true;
-            if (fileName != null)
-            {
-                saveFileDialog.FileName = fileName;
-            }
-            else if (item == 저장StoolStripMenuItem)
-            {
-                saveFileDialog.FileName = "Untitled.txt";
-            }
-            else
-            {
-                saveFileDialog.FileName = ".txt";
-            }
+            saveFileDialog.FileName = ".txt";
+            if (fileName != null) { saveFileDialog.FileName = fileName; }
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                StreamWriter writer = new StreamWriter(saveFileDialog.FileName, false, System.Text.Encoding.UTF8);
-                if (writer != null)
+                using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName, false, System.Text.Encoding.UTF8))
                 {
-                    try
-                    {
-                        writer.WriteLine(textBox1.Text);
-                        this.Text = saveFileDialog.FileName.Split("\\").Last();
-                        modified = false;
-                    }
-                    catch
-                    {
-                        MessageBox.Show("cannot write");
-                    }
-                    finally
-                    {
-                        writer.Close();
-                    }
+                    writer.WriteLine(textBox1.Text);
+                    this.Text = saveFileDialog.FileName.Split("\\").Last();
+                    fileName = this.Text;
+                    opened = true;
+                    modified = false;
+                    writer.Close();
                 }
             }
         }
@@ -129,15 +123,21 @@ namespace DarkNotepad
                         fileName = openFileDialog.FileName.Split("\\").Last();
                         filePath = openFileDialog.FileName.Replace(fileName, "");
                         textBox1.Text = reader.ReadToEnd();
+                        reader.Close();
                         fileStream.Close();
                         this.Text = fileName;
+                        opened = true;
                         modified = false;
                     }
                 }
             }
-            else if (e.ClickedItem==저장StoolStripMenuItem || e.ClickedItem==다른이름으로저장AtoolStripMenuItem)
+            else if (e.ClickedItem == 저장StoolStripMenuItem)
             {
-                saveFile(e.ClickedItem);
+                quickSaveFile();
+            }
+            else if (e.ClickedItem == 다른이름으로저장AtoolStripMenuItem)
+            {
+                saveFile();
             }
             else if (e.ClickedItem == 끝내기XtoolStripMenuItem)
             {
@@ -204,15 +204,9 @@ namespace DarkNotepad
                 MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);
 
-                if (drg == DialogResult.Yes)
-                {
-                    saveFile(null);
-                }
+                if (drg == DialogResult.Yes) { saveFile(); }
                 else if (drg == DialogResult.No) {}
-                else
-                {
-                    e.Cancel = true;
-                }
+                else { e.Cancel = true; }
             }
         }
     }
