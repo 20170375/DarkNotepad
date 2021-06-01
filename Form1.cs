@@ -13,12 +13,17 @@ namespace DarkNotepad
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        public Form1(string[] args)
         {
             InitializeComponent();
 
             this.Text = "Untitled";
             textBoxSetup();
+
+            if (args.Length > 0)
+            {
+                openFile(args[0]);
+            }
         }
 
         private String fileName;
@@ -29,6 +34,20 @@ namespace DarkNotepad
         {
             textBox1.Location = new Point(0, 31);
             textBox1.Size = new Size(this.Size.Width-15, this.Size.Height-78);
+        }
+
+        private void openFile(string path)
+        {
+            FileStream fileStream = File.OpenRead(path);
+            using (StreamReader reader = new StreamReader(fileStream))
+            {
+                fileName = path.Split("\\").Last();
+                textBox1.Text = reader.ReadToEnd();
+                textBox1.Select(0, 0);
+                fileStream.Close();
+                this.Text = fileName;
+                modified = false;
+            }
         }
 
         private void saveFile(ToolStripItem item)

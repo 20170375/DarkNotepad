@@ -30,6 +30,7 @@ namespace DarkNotepad
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.파일FtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.파일FcontextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -265,6 +266,7 @@ namespace DarkNotepad
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.menuStrip);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(212)))), ((int)(((byte)(212)))));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Form1";
             this.Text = "Form1";
