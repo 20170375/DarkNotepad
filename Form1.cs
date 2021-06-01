@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DarkNotepad
@@ -34,7 +29,7 @@ namespace DarkNotepad
         private void textBoxSetup()
         {
             textBox1.Location = new Point(0, 31);
-            textBox1.Size = new Size(this.Size.Width-15, this.Size.Height-78);
+            textBox1.Size = new Size(this.Size.Width - 15, this.Size.Height - 78);
         }
 
         private void openFile(string path)
@@ -65,6 +60,9 @@ namespace DarkNotepad
                 this.Text = fileName;
                 opened = true;
                 modified = false;
+                저장StoolStripMenuItem.Enabled = false;
+                다른이름으로저장AtoolStripMenuItem.Enabled = false;
+                writer.Close();
             }
         }
 
@@ -89,6 +87,8 @@ namespace DarkNotepad
                     fileName = this.Text;
                     opened = true;
                     modified = false;
+                    저장StoolStripMenuItem.Enabled = false;
+                    다른이름으로저장AtoolStripMenuItem.Enabled = false;
                     writer.Close();
                 }
             }
@@ -128,6 +128,8 @@ namespace DarkNotepad
                         this.Text = fileName;
                         opened = true;
                         modified = false;
+                        저장StoolStripMenuItem.Enabled = false;
+                        다른이름으로저장AtoolStripMenuItem.Enabled = false;
                     }
                 }
             }
@@ -192,6 +194,8 @@ namespace DarkNotepad
             {
                 this.Text = "*" + this.Text;
                 modified = true;
+                저장StoolStripMenuItem.Enabled = true;
+                다른이름으로저장AtoolStripMenuItem.Enabled = true;
             }
         }
 
@@ -205,7 +209,7 @@ namespace DarkNotepad
                 MessageBoxDefaultButton.Button2);
 
                 if (drg == DialogResult.Yes) { saveFile(); }
-                else if (drg == DialogResult.No) {}
+                else if (drg == DialogResult.No) { }
                 else { e.Cancel = true; }
             }
         }

@@ -123,12 +123,14 @@ namespace DarkNotepad
             // 
             // 저장StoolStripMenuItem
             // 
+            this.저장StoolStripMenuItem.Enabled = false;
             this.저장StoolStripMenuItem.Name = "저장StoolStripMenuItem";
             this.저장StoolStripMenuItem.Size = new System.Drawing.Size(249, 28);
             this.저장StoolStripMenuItem.Text = "저장(&S)";
             // 
             // 다른이름으로저장AtoolStripMenuItem
             // 
+            this.다른이름으로저장AtoolStripMenuItem.Enabled = false;
             this.다른이름으로저장AtoolStripMenuItem.Name = "다른이름으로저장AtoolStripMenuItem";
             this.다른이름으로저장AtoolStripMenuItem.Size = new System.Drawing.Size(249, 28);
             this.다른이름으로저장AtoolStripMenuItem.Text = "다른 이름으로 저장(&A)";
