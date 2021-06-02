@@ -8,13 +8,15 @@ namespace DarkNotepad
 {
     public partial class Form1 : Form
     {
-        public Form1(string[] args)
+        public Form1()
         {
             InitializeComponent();
 
-            this.Text = "Untitled";
+            reset();
             textBoxSetup();
-
+        }
+        public Form1(string[] args) : this()
+        {
             if (args.Length > 0)
             {
                 openFile(args[0]);
@@ -23,13 +25,23 @@ namespace DarkNotepad
 
         private String fileName;
         private String filePath;
-        private bool opened = false;
-        private bool modified = false;
+        private bool opened;
+        private bool modified;
 
         private void textBoxSetup()
         {
             textBox1.Location = new Point(0, 31);
             textBox1.Size = new Size(this.Size.Width - 15, this.Size.Height - 78);
+        }
+
+        private void reset()
+        {
+            this.Text = "Untitled";
+            textBox1.Text = null;
+            fileName = null;
+            filePath = null;
+            opened = false;
+            modified = false;
         }
 
         private void openFile(string path)
@@ -66,7 +78,7 @@ namespace DarkNotepad
             }
         }
 
-        private void saveFile()
+        private bool saveFile()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
@@ -90,8 +102,10 @@ namespace DarkNotepad
                     저장StoolStripMenuItem.Enabled = false;
                     다른이름으로저장AtoolStripMenuItem.Enabled = false;
                     writer.Close();
+                    return true;
                 }
             }
+            return false;
         }
 
         private void 파일FcontextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -100,11 +114,21 @@ namespace DarkNotepad
 
             if (e.ClickedItem == 새로만들기NtoolStripMenuItem)
             {
+                DialogResult drg = MessageBox.Show("Save modification?", "Notepad",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
 
+                if (drg == DialogResult.Yes)
+                {
+                    if (saveFile() == true) { reset(); }
+                }
+                else if (drg == DialogResult.No) { reset(); }
+                else { }
             }
             else if (e.ClickedItem == 새창WtoolStripMenuItem)
             {
-
+                
             }
             else if (e.ClickedItem == 열기OtoolStripMenuItem)
             {
