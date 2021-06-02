@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace DarkNotepad
         {
             if (args.Length > 0)
             {
-                openFile(args[0]);
+                quickOpenFile(args[0]);
             }
         }
 
@@ -44,7 +45,7 @@ namespace DarkNotepad
             modified = false;
         }
 
-        private void openFile(string path)
+        private void quickOpenFile(string path)
         {
             using (StreamReader reader = new StreamReader(path))
             {
@@ -58,23 +59,53 @@ namespace DarkNotepad
             }
         }
 
+        private bool openFile()
+        {
+            openFileDialog.InitialDirectory = @"C:\";
+            openFileDialog.Filter = "텍스트 파일(*.txt)|*.txt|모든 파일(*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.Multiselect = true;
+            openFileDialog.FileName = null;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Stream fileStream = openFileDialog.OpenFile();
+                using (StreamReader reader = new StreamReader(fileStream))
+                {
+                    fileName = openFileDialog.FileName.Split("\\").Last();
+                    filePath = openFileDialog.FileName.Replace(fileName, "");
+                    textBox1.Text = reader.ReadToEnd();
+                    reader.Close();
+                    fileStream.Close();
+                    this.Text = fileName;
+                    opened = true;
+                    modified = false;
+                    저장StoolStripMenuItem.Enabled = false;
+                    다른이름으로저장AtoolStripMenuItem.Enabled = false;
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private void quickSaveFile()
         {
-            if (opened == false)
-            {
-                saveFile();
-                return;
-            }
+            if (modified == false) { return; }
 
-            using (StreamWriter writer = new StreamWriter(filePath + fileName, false, System.Text.Encoding.UTF8))
+            if (opened == false) { saveFile(); }
+            else
             {
-                writer.WriteLine(textBox1.Text);
-                this.Text = fileName;
-                opened = true;
-                modified = false;
-                저장StoolStripMenuItem.Enabled = false;
-                다른이름으로저장AtoolStripMenuItem.Enabled = false;
-                writer.Close();
+                using (StreamWriter writer = new StreamWriter(filePath + fileName, false, System.Text.Encoding.UTF8))
+                {
+                    writer.WriteLine(textBox1.Text);
+                    this.Text = fileName;
+                    opened = true;
+                    modified = false;
+                    저장StoolStripMenuItem.Enabled = false;
+                    다른이름으로저장AtoolStripMenuItem.Enabled = false;
+                    writer.Close();
+                }
             }
         }
 
@@ -126,49 +157,11 @@ namespace DarkNotepad
                 else if (drg == DialogResult.No) { reset(); }
                 else { }
             }
-            else if (e.ClickedItem == 새창WtoolStripMenuItem)
-            {
-                System.Diagnostics.Process.Start("DarkNotepad.exe");
-            }
-            else if (e.ClickedItem == 열기OtoolStripMenuItem)
-            {
-                openFileDialog.InitialDirectory = @"C:\";
-                openFileDialog.Filter = "텍스트 파일(*.txt)|*.txt|모든 파일(*.*)|*.*";
-                openFileDialog.FilterIndex = 1;
-                openFileDialog.RestoreDirectory = true;
-                openFileDialog.Multiselect = true;
-                openFileDialog.FileName = null;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    Stream fileStream = openFileDialog.OpenFile();
-                    using (StreamReader reader = new StreamReader(fileStream))
-                    {
-                        fileName = openFileDialog.FileName.Split("\\").Last();
-                        filePath = openFileDialog.FileName.Replace(fileName, "");
-                        textBox1.Text = reader.ReadToEnd();
-                        reader.Close();
-                        fileStream.Close();
-                        this.Text = fileName;
-                        opened = true;
-                        modified = false;
-                        저장StoolStripMenuItem.Enabled = false;
-                        다른이름으로저장AtoolStripMenuItem.Enabled = false;
-                    }
-                }
-            }
-            else if (e.ClickedItem == 저장StoolStripMenuItem)
-            {
-                quickSaveFile();
-            }
-            else if (e.ClickedItem == 다른이름으로저장AtoolStripMenuItem)
-            {
-                saveFile();
-            }
-            else if (e.ClickedItem == 끝내기XtoolStripMenuItem)
-            {
-                Application.Exit();
-            }
+            else if (e.ClickedItem == 새창WtoolStripMenuItem) { Process.Start("DarkNotepad.exe"); }
+            else if (e.ClickedItem == 열기OtoolStripMenuItem) { openFile(); }
+            else if (e.ClickedItem == 저장StoolStripMenuItem) { quickSaveFile(); }
+            else if (e.ClickedItem == 다른이름으로저장AtoolStripMenuItem) { saveFile(); }
+            else if (e.ClickedItem == 끝내기XtoolStripMenuItem) { Application.Exit(); }
         }
 
         private void 보기VcontextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -236,6 +229,13 @@ namespace DarkNotepad
                 else if (drg == DialogResult.No) { }
                 else { e.Cancel = true; }
             }
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.S) { quickSaveFile(); }
+            else if (e.Control && e.KeyCode == Keys.W) { this.Close(); }
+            else if (e.Control && e.KeyCode == Keys.O) { openFile(); }
         }
     }
 }

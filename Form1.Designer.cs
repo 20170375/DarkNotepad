@@ -106,18 +106,21 @@ namespace DarkNotepad
             // 새로만들기NtoolStripMenuItem
             // 
             this.새로만들기NtoolStripMenuItem.Name = "새로만들기NtoolStripMenuItem";
+            this.새로만들기NtoolStripMenuItem.ShortcutKeyDisplayString = "";
             this.새로만들기NtoolStripMenuItem.Size = new System.Drawing.Size(249, 28);
             this.새로만들기NtoolStripMenuItem.Text = "새로 만들기(&N)";
             // 
             // 새창WtoolStripMenuItem
             // 
             this.새창WtoolStripMenuItem.Name = "새창WtoolStripMenuItem";
+            this.새창WtoolStripMenuItem.ShortcutKeyDisplayString = "";
             this.새창WtoolStripMenuItem.Size = new System.Drawing.Size(249, 28);
             this.새창WtoolStripMenuItem.Text = "새 창(&W)";
             // 
             // 열기OtoolStripMenuItem
             // 
             this.열기OtoolStripMenuItem.Name = "열기OtoolStripMenuItem";
+            this.열기OtoolStripMenuItem.ShortcutKeyDisplayString = "";
             this.열기OtoolStripMenuItem.Size = new System.Drawing.Size(249, 28);
             this.열기OtoolStripMenuItem.Text = "열기(&O)";
             // 
@@ -125,6 +128,7 @@ namespace DarkNotepad
             // 
             this.저장StoolStripMenuItem.Enabled = false;
             this.저장StoolStripMenuItem.Name = "저장StoolStripMenuItem";
+            this.저장StoolStripMenuItem.ShortcutKeyDisplayString = "";
             this.저장StoolStripMenuItem.Size = new System.Drawing.Size(249, 28);
             this.저장StoolStripMenuItem.Text = "저장(&S)";
             // 
@@ -132,12 +136,14 @@ namespace DarkNotepad
             // 
             this.다른이름으로저장AtoolStripMenuItem.Enabled = false;
             this.다른이름으로저장AtoolStripMenuItem.Name = "다른이름으로저장AtoolStripMenuItem";
+            this.다른이름으로저장AtoolStripMenuItem.ShortcutKeyDisplayString = "";
             this.다른이름으로저장AtoolStripMenuItem.Size = new System.Drawing.Size(249, 28);
             this.다른이름으로저장AtoolStripMenuItem.Text = "다른 이름으로 저장(&A)";
             // 
             // 끝내기XtoolStripMenuItem
             // 
             this.끝내기XtoolStripMenuItem.Name = "끝내기XtoolStripMenuItem";
+            this.끝내기XtoolStripMenuItem.ShortcutKeyDisplayString = "";
             this.끝내기XtoolStripMenuItem.Size = new System.Drawing.Size(249, 28);
             this.끝내기XtoolStripMenuItem.Text = "끝내기(&X)";
             // 
@@ -219,6 +225,7 @@ namespace DarkNotepad
             // 
             // 상태표시줄StoolStripMenuItem
             // 
+            this.상태표시줄StoolStripMenuItem.Enabled = false;
             this.상태표시줄StoolStripMenuItem.Name = "상태표시줄StoolStripMenuItem";
             this.상태표시줄StoolStripMenuItem.Size = new System.Drawing.Size(190, 28);
             this.상태표시줄StoolStripMenuItem.Text = "상태 표시줄(&S)";
@@ -243,6 +250,7 @@ namespace DarkNotepad
             // 
             // textBox1
             // 
+            this.textBox1.AcceptsTab = true;
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("맑은 고딕", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -254,6 +262,7 @@ namespace DarkNotepad
             this.textBox1.Size = new System.Drawing.Size(410, 229);
             this.textBox1.TabIndex = 4;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // openFileDialog
             // 
