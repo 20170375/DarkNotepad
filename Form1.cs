@@ -128,7 +128,7 @@ namespace DarkNotepad
             }
             else if (e.ClickedItem == 새창WtoolStripMenuItem)
             {
-                
+                System.Diagnostics.Process.Start("DarkNotepad.exe");
             }
             else if (e.ClickedItem == 열기OtoolStripMenuItem)
             {
