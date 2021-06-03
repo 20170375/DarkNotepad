@@ -53,11 +53,11 @@ namespace DarkNotepad
             this.배경색BtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.글씨색FtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.초기화RtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.backgroundColorDialog = new System.Windows.Forms.ColorDialog();
             this.fontColorDialog = new System.Windows.Forms.ColorDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.menuStrip.SuspendLayout();
             this.파일FcontextMenuStrip.SuspendLayout();
             this.편집EcontextMenuStrip.SuspendLayout();
@@ -248,25 +248,25 @@ namespace DarkNotepad
             this.초기화RtoolStripMenuItem.Size = new System.Drawing.Size(190, 28);
             this.초기화RtoolStripMenuItem.Text = "초기화(&R)";
             // 
-            // textBox1
-            // 
-            this.textBox1.AcceptsTab = true;
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("맑은 고딕", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(212)))), ((int)(((byte)(212)))));
-            this.textBox1.Location = new System.Drawing.Point(148, 95);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(410, 229);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
-            // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.AcceptsTab = true;
+            this.richTextBox1.AutoWordSelection = true;
+            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Font = new System.Drawing.Font("맑은 고딕", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.richTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(212)))), ((int)(((byte)(212)))));
+            this.richTextBox1.Location = new System.Drawing.Point(107, 205);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(426, 302);
+            this.richTextBox1.TabIndex = 5;
+            this.richTextBox1.Text = "";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
             // 
             // Form1
             // 
@@ -274,7 +274,7 @@ namespace DarkNotepad
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(633, 676);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.menuStrip);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(212)))), ((int)(((byte)(212)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -317,12 +317,12 @@ namespace DarkNotepad
         private System.Windows.Forms.ToolStripMenuItem 배경색BtoolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 글씨색FtoolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 찾기FtoolStripMenuItem;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ColorDialog backgroundColorDialog;
         private System.Windows.Forms.ColorDialog fontColorDialog;
         private System.Windows.Forms.FontDialog fontDialog;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.ToolStripMenuItem 초기화RtoolStripMenuItem;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

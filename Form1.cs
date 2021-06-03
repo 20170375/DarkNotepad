@@ -31,14 +31,14 @@ namespace DarkNotepad
 
         private void textBoxSetup()
         {
-            textBox1.Location = new Point(0, 31);
-            textBox1.Size = new Size(this.Size.Width - 15, this.Size.Height - 78);
+            richTextBox1.Location = new Point(0, 31);
+            richTextBox1.Size = new Size(this.Size.Width - 15, this.Size.Height - 78);
         }
 
         private void reset()
         {
             this.Text = "Untitled";
-            textBox1.Text = null;
+            richTextBox1.Text = null;
             fileName = null;
             filePath = null;
             opened = false;
@@ -50,8 +50,8 @@ namespace DarkNotepad
             using (StreamReader reader = new StreamReader(path))
             {
                 fileName = path.Split("\\").Last();
-                textBox1.Text = reader.ReadToEnd();
-                textBox1.Select(0, 0);
+                richTextBox1.Text = reader.ReadToEnd();
+                richTextBox1.Select(0, 0);
                 reader.Close();
                 this.Text = fileName;
                 modified = false;
@@ -75,7 +75,7 @@ namespace DarkNotepad
                 {
                     fileName = openFileDialog.FileName.Split("\\").Last();
                     filePath = openFileDialog.FileName.Replace(fileName, "");
-                    textBox1.Text = reader.ReadToEnd();
+                    richTextBox1.Text = reader.ReadToEnd();
                     reader.Close();
                     fileStream.Close();
                     this.Text = fileName;
@@ -98,7 +98,7 @@ namespace DarkNotepad
             {
                 using (StreamWriter writer = new StreamWriter(filePath + fileName, false, System.Text.Encoding.UTF8))
                 {
-                    writer.WriteLine(textBox1.Text);
+                    writer.WriteLine(richTextBox1.Text);
                     this.Text = fileName;
                     opened = true;
                     modified = false;
@@ -125,7 +125,7 @@ namespace DarkNotepad
             {
                 using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName, false, System.Text.Encoding.UTF8))
                 {
-                    writer.WriteLine(textBox1.Text);
+                    writer.WriteLine(richTextBox1.Text);
                     this.Text = saveFileDialog.FileName.Split("\\").Last();
                     fileName = this.Text;
                     opened = true;
@@ -175,17 +175,17 @@ namespace DarkNotepad
             else if (e.ClickedItem == 배경색BtoolStripMenuItem)
             {
                 backgroundColorDialog.ShowDialog();
-                textBox1.BackColor = backgroundColorDialog.Color;
+                richTextBox1.BackColor = backgroundColorDialog.Color;
             }
             else if (e.ClickedItem == 글씨색FtoolStripMenuItem)
             {
                 fontColorDialog.ShowDialog();
-                textBox1.ForeColor = fontColorDialog.Color;
+                richTextBox1.ForeColor = fontColorDialog.Color;
             }
             else if (e.ClickedItem == 초기화RtoolStripMenuItem)
             {
-                textBox1.BackColor = Color.FromArgb(30, 30, 30);
-                textBox1.ForeColor = Color.FromArgb(212, 212, 212);
+                richTextBox1.BackColor = Color.FromArgb(30, 30, 30);
+                richTextBox1.ForeColor = Color.FromArgb(212, 212, 212);
             }
         }
 
@@ -196,24 +196,13 @@ namespace DarkNotepad
             if (e.ClickedItem == 글꼴FtoolStripMenuItem)
             {
                 fontDialog.ShowDialog();
-                textBox1.Font = fontDialog.Font;
+                richTextBox1.Font = fontDialog.Font;
             }
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
             textBoxSetup();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            if (modified == false)
-            {
-                this.Text = "*" + this.Text;
-                modified = true;
-                저장StoolStripMenuItem.Enabled = true;
-                다른이름으로저장AtoolStripMenuItem.Enabled = true;
-            }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -231,11 +220,24 @@ namespace DarkNotepad
             }
         }
 
-        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (modified == false)
+            {
+                this.Text = "*" + this.Text;
+                modified = true;
+                저장StoolStripMenuItem.Enabled = true;
+                다른이름으로저장AtoolStripMenuItem.Enabled = true;
+            }
+        }
+
+        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.S) { quickSaveFile(); }
             else if (e.Control && e.KeyCode == Keys.W) { this.Close(); }
             else if (e.Control && e.KeyCode == Keys.O) { openFile(); }
+            else if (e.Control && e.KeyCode == Keys.Oemplus) { richTextBox1.ZoomFactor *= (float)(1.1); }
+            else if (e.Control && e.KeyCode == Keys.OemMinus) { richTextBox1.ZoomFactor *= (float)(0.9); }
         }
     }
 }
