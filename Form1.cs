@@ -14,7 +14,7 @@ namespace DarkNotepad
             InitializeComponent();
 
             reset();
-            textBoxSetup();
+            setup();
         }
         public Form1(string[] args) : this()
         {
@@ -29,10 +29,15 @@ namespace DarkNotepad
         private bool opened;
         private bool modified;
 
-        private void textBoxSetup()
+        private void setup()
         {
             richTextBox1.Location = new Point(0, 31);
-            richTextBox1.Size = new Size(this.Size.Width - 15, this.Size.Height - 78);
+            richTextBox1.Dock = DockStyle.Top;
+
+            richTextBox1.Width = this.Size.Width - 15;
+            richTextBox1.Height = this.Size.Height - 78;
+            label1.Width = this.Width;
+            if (label1.Visible == true) { richTextBox1.Height -= label1.Height; }
         }
 
         private void reset()
@@ -139,6 +144,16 @@ namespace DarkNotepad
             return false;
         }
 
+        private void stateUpdate()
+        {
+            int index = richTextBox1.SelectionStart;
+            int line = richTextBox1.GetLineFromCharIndex(index);
+            Point pos = richTextBox1.GetPositionFromCharIndex(index);
+            pos.X = 0;
+            int col = index - richTextBox1.GetCharIndexFromPosition(pos);
+            label1.Text = "line: " + line.ToString() + ", col: " + col.ToString();
+        }
+
         private void 파일FcontextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             파일FtoolStripMenuItem.HideDropDown();
@@ -170,7 +185,19 @@ namespace DarkNotepad
 
             if (e.ClickedItem == 상태표시줄StoolStripMenuItem)
             {
-
+                if (label1.Visible == true)
+                {
+                    label1.Dock = DockStyle.None;
+                    label1.Visible = false;
+                    상태표시줄StoolStripMenuItem.Checked = false;
+                }
+                else
+                {
+                    label1.Dock = DockStyle.Bottom;
+                    label1.Visible = true;
+                    상태표시줄StoolStripMenuItem.Checked = true;
+                }
+                setup();
             }
             else if (e.ClickedItem == 배경색BtoolStripMenuItem)
             {
@@ -202,7 +229,8 @@ namespace DarkNotepad
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            textBoxSetup();
+            setup();
+            stateUpdate();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -220,6 +248,18 @@ namespace DarkNotepad
             }
         }
 
+        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.S) { quickSaveFile(); }
+            else if (e.Control && e.KeyCode == Keys.W) { this.Close(); }
+            else if (e.Control && e.KeyCode == Keys.O) { openFile(); }
+            else if (e.Control && e.KeyCode == Keys.Oemplus) { richTextBox1.ZoomFactor *= (float)(1.1); }
+            else if (e.Control && e.KeyCode == Keys.OemMinus) { richTextBox1.ZoomFactor *= (float)(0.9); }
+            else if (e.Control && e.KeyCode == Keys.F)
+            {
+                // To do
+            }
+        }
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
             if (modified == false)
@@ -231,13 +271,7 @@ namespace DarkNotepad
             }
         }
 
-        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control && e.KeyCode == Keys.S) { quickSaveFile(); }
-            else if (e.Control && e.KeyCode == Keys.W) { this.Close(); }
-            else if (e.Control && e.KeyCode == Keys.O) { openFile(); }
-            else if (e.Control && e.KeyCode == Keys.Oemplus) { richTextBox1.ZoomFactor *= (float)(1.1); }
-            else if (e.Control && e.KeyCode == Keys.OemMinus) { richTextBox1.ZoomFactor *= (float)(0.9); }
-        }
+        private void richTextBox1_SelectionChanged(object sender, EventArgs e) { stateUpdate(); }
+
     }
 }

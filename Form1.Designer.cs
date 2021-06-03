@@ -58,11 +58,14 @@ namespace DarkNotepad
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.파일FcontextMenuStrip.SuspendLayout();
             this.편집EcontextMenuStrip.SuspendLayout();
             this.서식OcontextMenuStrip.SuspendLayout();
             this.보기VcontextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -225,7 +228,6 @@ namespace DarkNotepad
             // 
             // 상태표시줄StoolStripMenuItem
             // 
-            this.상태표시줄StoolStripMenuItem.Enabled = false;
             this.상태표시줄StoolStripMenuItem.Name = "상태표시줄StoolStripMenuItem";
             this.상태표시줄StoolStripMenuItem.Size = new System.Drawing.Size(190, 28);
             this.상태표시줄StoolStripMenuItem.Text = "상태 표시줄(&S)";
@@ -260,20 +262,34 @@ namespace DarkNotepad
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Font = new System.Drawing.Font("맑은 고딕", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.richTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(212)))), ((int)(((byte)(212)))));
-            this.richTextBox1.Location = new System.Drawing.Point(107, 205);
+            this.richTextBox1.Location = new System.Drawing.Point(41, 64);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(426, 302);
+            this.richTextBox1.Size = new System.Drawing.Size(542, 448);
             this.richTextBox1.TabIndex = 5;
             this.richTextBox1.Text = "";
+            this.richTextBox1.SelectionChanged += new System.EventHandler(this.richTextBox1_SelectionChanged);
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.label1.Font = new System.Drawing.Font("맑은 고딕", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(41, 613);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(542, 24);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "label1";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label1.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(633, 676);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.menuStrip);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(212)))), ((int)(((byte)(212)))));
@@ -289,6 +305,7 @@ namespace DarkNotepad
             this.편집EcontextMenuStrip.ResumeLayout(false);
             this.서식OcontextMenuStrip.ResumeLayout(false);
             this.보기VcontextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -323,6 +340,8 @@ namespace DarkNotepad
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.ToolStripMenuItem 초기화RtoolStripMenuItem;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.Label label1;
     }
 }
 
