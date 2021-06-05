@@ -102,7 +102,6 @@ namespace DarkNotepad
             this.다른이름으로저장AtoolStripMenuItem,
             this.끝내기XtoolStripMenuItem});
             this.파일FcontextMenuStrip.Name = "contextMenuStrip1";
-            this.파일FcontextMenuStrip.OwnerItem = this.파일FtoolStripMenuItem;
             this.파일FcontextMenuStrip.Size = new System.Drawing.Size(250, 172);
             this.파일FcontextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.파일FcontextMenuStrip_ItemClicked);
             // 
@@ -137,7 +136,6 @@ namespace DarkNotepad
             // 
             // 다른이름으로저장AtoolStripMenuItem
             // 
-            this.다른이름으로저장AtoolStripMenuItem.Enabled = false;
             this.다른이름으로저장AtoolStripMenuItem.Name = "다른이름으로저장AtoolStripMenuItem";
             this.다른이름으로저장AtoolStripMenuItem.ShortcutKeyDisplayString = "";
             this.다른이름으로저장AtoolStripMenuItem.Size = new System.Drawing.Size(249, 28);

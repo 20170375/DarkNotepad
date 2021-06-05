@@ -26,8 +26,8 @@ namespace DarkNotepad
 
         private String fileName;
         private String filePath;
+        private String fileData;
         private bool opened;
-        private bool modified;
 
         private void setup()
         {
@@ -44,10 +44,10 @@ namespace DarkNotepad
         {
             this.Text = "Untitled";
             richTextBox1.Text = null;
-            fileName = null;
+            fileName = this.Text;
             filePath = null;
+            fileData = "";
             opened = false;
-            modified = false;
         }
 
         private void quickOpenFile(string path)
@@ -59,8 +59,9 @@ namespace DarkNotepad
                 richTextBox1.Select(0, 0);
                 reader.Close();
                 this.Text = fileName;
-                modified = false;
                 opened = true;
+                저장StoolStripMenuItem.Enabled = false;
+                fileData = richTextBox1.Text;
             }
         }
 
@@ -85,9 +86,8 @@ namespace DarkNotepad
                     fileStream.Close();
                     this.Text = fileName;
                     opened = true;
-                    modified = false;
                     저장StoolStripMenuItem.Enabled = false;
-                    다른이름으로저장AtoolStripMenuItem.Enabled = false;
+                    fileData = richTextBox1.Text;
                     return true;
                 }
             }
@@ -96,7 +96,7 @@ namespace DarkNotepad
 
         private void quickSaveFile()
         {
-            if (modified == false) { return; }
+            if (fileData == richTextBox1.Text) { return; }
 
             if (opened == false) { saveFile(); }
             else
@@ -106,9 +106,8 @@ namespace DarkNotepad
                     writer.WriteLine(richTextBox1.Text);
                     this.Text = fileName;
                     opened = true;
-                    modified = false;
                     저장StoolStripMenuItem.Enabled = false;
-                    다른이름으로저장AtoolStripMenuItem.Enabled = false;
+                    fileData = richTextBox1.Text;
                     writer.Close();
                 }
             }
@@ -119,12 +118,15 @@ namespace DarkNotepad
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
             saveFileDialog.InitialDirectory = @"C:\";
-            if (filePath != null) { saveFileDialog.InitialDirectory = filePath; }
+            saveFileDialog.FileName = ".txt";
+            if (filePath != null)
+            { 
+                saveFileDialog.InitialDirectory = filePath;
+                saveFileDialog.FileName = fileName;
+            }
             saveFileDialog.Filter = "텍스트 파일(*.txt)|*.txt|모든 파일(*.*)|*.*";
             saveFileDialog.FilterIndex = 2;
             saveFileDialog.RestoreDirectory = true;
-            saveFileDialog.FileName = ".txt";
-            if (fileName != null) { saveFileDialog.FileName = fileName; }
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -134,9 +136,8 @@ namespace DarkNotepad
                     this.Text = saveFileDialog.FileName.Split("\\").Last();
                     fileName = this.Text;
                     opened = true;
-                    modified = false;
                     저장StoolStripMenuItem.Enabled = false;
-                    다른이름으로저장AtoolStripMenuItem.Enabled = false;
+                    fileData = richTextBox1.Text;
                     writer.Close();
                     return true;
                 }
@@ -173,7 +174,21 @@ namespace DarkNotepad
                 else { }
             }
             else if (e.ClickedItem == 새창WtoolStripMenuItem) { Process.Start("DarkNotepad.exe"); }
-            else if (e.ClickedItem == 열기OtoolStripMenuItem) { openFile(); }
+            else if (e.ClickedItem == 열기OtoolStripMenuItem)
+            {
+                if (fileData != richTextBox1.Text)
+                { 
+                    DialogResult drg = MessageBox.Show("Save before open?", "Notepad",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
+
+                    if (drg == DialogResult.Yes) { quickSaveFile(); }
+                    else if (drg == DialogResult.No) { }
+                    else { return; }
+                }
+                openFile();
+            }
             else if (e.ClickedItem == 저장StoolStripMenuItem) { quickSaveFile(); }
             else if (e.ClickedItem == 다른이름으로저장AtoolStripMenuItem) { saveFile(); }
             else if (e.ClickedItem == 끝내기XtoolStripMenuItem) { Application.Exit(); }
@@ -235,7 +250,7 @@ namespace DarkNotepad
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (modified == true)
+            if (fileData != richTextBox1.Text)
             {
                 DialogResult drg = MessageBox.Show("Save before exit?", "Notepad",
                 MessageBoxButtons.YesNoCancel,
@@ -260,14 +275,18 @@ namespace DarkNotepad
                 // To do
             }
         }
+
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            if (modified == false)
+            if (fileData != richTextBox1.Text)
             {
-                this.Text = "*" + this.Text;
-                modified = true;
+                this.Text = "*" + fileName;
                 저장StoolStripMenuItem.Enabled = true;
-                다른이름으로저장AtoolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                this.Text = fileName;
+                저장StoolStripMenuItem.Enabled = false;
             }
         }
 
