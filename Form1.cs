@@ -194,6 +194,15 @@ namespace DarkNotepad
             else if (e.ClickedItem == 끝내기XtoolStripMenuItem) { Application.Exit(); }
         }
 
+        private void 편집EcontextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem == 실행취소UtoolStripMenuItem) { richTextBox1.Undo(); }
+            else if (e.ClickedItem == 찾기FtoolStripMenuItem)
+            {
+                // To do
+            }
+        }
+
         private void 보기VcontextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             보기VtoolStripMenuItem.HideDropDown();
@@ -268,6 +277,10 @@ namespace DarkNotepad
             else if (e.Control && e.KeyCode == Keys.O) { openFile(); }
             else if (e.Control && e.KeyCode == Keys.Oemplus) { richTextBox1.ZoomFactor *= (float)(1.1); }
             else if (e.Control && e.KeyCode == Keys.OemMinus) { richTextBox1.ZoomFactor *= (float)(0.9); }
+            else if (e.Control && e.KeyCode == Keys.U)
+            {
+                
+            }
             else if (e.Control && e.KeyCode == Keys.F)
             {
                 // To do
@@ -280,15 +293,16 @@ namespace DarkNotepad
             {
                 this.Text = "*" + fileName;
                 저장StoolStripMenuItem.Enabled = true;
+                실행취소UtoolStripMenuItem.Enabled = true;
             }
             else
             {
                 this.Text = fileName;
                 저장StoolStripMenuItem.Enabled = false;
+                실행취소UtoolStripMenuItem.Enabled = false;
             }
         }
 
         private void richTextBox1_SelectionChanged(object sender, EventArgs e) { stateUpdate(); }
-
     }
 }

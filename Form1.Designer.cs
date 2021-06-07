@@ -102,6 +102,7 @@ namespace DarkNotepad
             this.다른이름으로저장AtoolStripMenuItem,
             this.끝내기XtoolStripMenuItem});
             this.파일FcontextMenuStrip.Name = "contextMenuStrip1";
+            this.파일FcontextMenuStrip.OwnerItem = this.파일FtoolStripMenuItem;
             this.파일FcontextMenuStrip.Size = new System.Drawing.Size(250, 172);
             this.파일FcontextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.파일FcontextMenuStrip_ItemClicked);
             // 
@@ -164,11 +165,12 @@ namespace DarkNotepad
             this.실행취소UtoolStripMenuItem,
             this.찾기FtoolStripMenuItem});
             this.편집EcontextMenuStrip.Name = "편집EcontextMenuStrip";
-            this.편집EcontextMenuStrip.OwnerItem = this.편집EtoolStripMenuItem;
             this.편집EcontextMenuStrip.Size = new System.Drawing.Size(171, 60);
+            this.편집EcontextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.편집EcontextMenuStrip_ItemClicked);
             // 
             // 실행취소UtoolStripMenuItem
             // 
+            this.실행취소UtoolStripMenuItem.Enabled = false;
             this.실행취소UtoolStripMenuItem.Name = "실행취소UtoolStripMenuItem";
             this.실행취소UtoolStripMenuItem.Size = new System.Drawing.Size(170, 28);
             this.실행취소UtoolStripMenuItem.Text = "실행취소(&U)";
