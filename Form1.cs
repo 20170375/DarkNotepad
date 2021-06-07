@@ -201,6 +201,10 @@ namespace DarkNotepad
             {
                 // To do
             }
+            else if (e.ClickedItem == 바꾸기RtoolStripMenuItem1)
+            {
+                // To do
+            }
         }
 
         private void 보기VcontextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -277,13 +281,13 @@ namespace DarkNotepad
             else if (e.Control && e.KeyCode == Keys.O) { openFile(); }
             else if (e.Control && e.KeyCode == Keys.Oemplus) { richTextBox1.ZoomFactor *= (float)(1.1); }
             else if (e.Control && e.KeyCode == Keys.OemMinus) { richTextBox1.ZoomFactor *= (float)(0.9); }
-            else if (e.Control && e.KeyCode == Keys.U)
-            {
-                
-            }
             else if (e.Control && e.KeyCode == Keys.F)
             {
-                // To do
+                // To do - 찾기 기능
+            }
+            else if (e.Control && e.KeyCode == Keys.H)
+            {
+                // To do - 바꾸기 기능
             }
         }
 

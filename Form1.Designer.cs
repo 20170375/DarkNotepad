@@ -60,6 +60,7 @@ namespace DarkNotepad
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.바꾸기RtoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.파일FcontextMenuStrip.SuspendLayout();
             this.편집EcontextMenuStrip.SuspendLayout();
@@ -163,9 +164,10 @@ namespace DarkNotepad
             this.편집EcontextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.편집EcontextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.실행취소UtoolStripMenuItem,
-            this.찾기FtoolStripMenuItem});
+            this.찾기FtoolStripMenuItem,
+            this.바꾸기RtoolStripMenuItem1});
             this.편집EcontextMenuStrip.Name = "편집EcontextMenuStrip";
-            this.편집EcontextMenuStrip.Size = new System.Drawing.Size(171, 60);
+            this.편집EcontextMenuStrip.Size = new System.Drawing.Size(171, 88);
             this.편집EcontextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.편집EcontextMenuStrip_ItemClicked);
             // 
             // 실행취소UtoolStripMenuItem
@@ -283,6 +285,12 @@ namespace DarkNotepad
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label1.Visible = false;
             // 
+            // 바꾸기RtoolStripMenuItem1
+            // 
+            this.바꾸기RtoolStripMenuItem1.Name = "바꾸기RtoolStripMenuItem1";
+            this.바꾸기RtoolStripMenuItem1.Size = new System.Drawing.Size(170, 28);
+            this.바꾸기RtoolStripMenuItem1.Text = "바꾸기(&R)";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
@@ -342,6 +350,7 @@ namespace DarkNotepad
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem 바꾸기RtoolStripMenuItem1;
     }
 }
 
