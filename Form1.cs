@@ -216,13 +216,11 @@ namespace DarkNotepad
             }
             else if (e.ClickedItem == 배경색BtoolStripMenuItem)
             {
-                backgroundColorDialog.ShowDialog();
-                richTextBox1.BackColor = backgroundColorDialog.Color;
+                if (backgroundColorDialog.ShowDialog() == DialogResult.OK) { richTextBox1.BackColor = backgroundColorDialog.Color; }
             }
             else if (e.ClickedItem == 글씨색FtoolStripMenuItem)
             {
-                fontColorDialog.ShowDialog();
-                richTextBox1.ForeColor = fontColorDialog.Color;
+                if (fontColorDialog.ShowDialog() == DialogResult.OK) { richTextBox1.ForeColor = fontColorDialog.Color; }
             }
             else if (e.ClickedItem == 초기화RtoolStripMenuItem)
             {
@@ -237,8 +235,8 @@ namespace DarkNotepad
 
             if (e.ClickedItem == 글꼴FtoolStripMenuItem)
             {
-                fontDialog.ShowDialog();
-                richTextBox1.Font = fontDialog.Font;
+                fontDialog.Font = richTextBox1.Font;
+                if (fontDialog.ShowDialog() == DialogResult.OK) { richTextBox1.Font = fontDialog.Font;  }
             }
         }
 
@@ -252,10 +250,10 @@ namespace DarkNotepad
         {
             if (fileData != richTextBox1.Text)
             {
-                DialogResult drg = MessageBox.Show("Save before exit?", "Notepad",
-                MessageBoxButtons.YesNoCancel,
-                MessageBoxIcon.Question,
-                MessageBoxDefaultButton.Button2);
+                DialogResult drg = MessageBox.Show("Save before exit?", "Notepad", 
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
 
                 if (drg == DialogResult.Yes) { saveFile(); }
                 else if (drg == DialogResult.No) { }

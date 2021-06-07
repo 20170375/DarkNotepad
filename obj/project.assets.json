@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Storage\\School\\3-1 Grade\\C#프로그래밍의이해\\sourceCode\\DarkNotepad\\DarkNotepad.csproj",
+      "projectUniqueName": "D:\\Storage\\School\\3-1 Semester\\C#프로그래밍의이해\\sourceCode\\DarkNotepad\\DarkNotepad.csproj",
       "projectName": "DarkNotepad",
-      "projectPath": "D:\\Storage\\School\\3-1 Grade\\C#프로그래밍의이해\\sourceCode\\DarkNotepad\\DarkNotepad.csproj",
+      "projectPath": "D:\\Storage\\School\\3-1 Semester\\C#프로그래밍의이해\\sourceCode\\DarkNotepad\\DarkNotepad.csproj",
       "packagesPath": "C:\\Users\\seungwon\\.nuget\\packages\\",
-      "outputPath": "D:\\Storage\\School\\3-1 Grade\\C#프로그래밍의이해\\sourceCode\\DarkNotepad\\obj\\",
+      "outputPath": "D:\\Storage\\School\\3-1 Semester\\C#프로그래밍의이해\\sourceCode\\DarkNotepad\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
