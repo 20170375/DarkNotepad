@@ -44,6 +44,7 @@ namespace DarkNotepad
             this.편집EcontextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.실행취소UtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.찾기FtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.바꾸기RtoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.서식OtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.서식OcontextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.글꼴FtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,7 +61,6 @@ namespace DarkNotepad
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.바꾸기RtoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.파일FcontextMenuStrip.SuspendLayout();
             this.편집EcontextMenuStrip.SuspendLayout();
@@ -83,6 +83,7 @@ namespace DarkNotepad
             this.menuStrip.Size = new System.Drawing.Size(633, 31);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
+            this.menuStrip.UseWaitCursor = true;
             // 
             // 파일FtoolStripMenuItem
             // 
@@ -167,6 +168,7 @@ namespace DarkNotepad
             this.찾기FtoolStripMenuItem,
             this.바꾸기RtoolStripMenuItem1});
             this.편집EcontextMenuStrip.Name = "편집EcontextMenuStrip";
+            this.편집EcontextMenuStrip.OwnerItem = this.편집EtoolStripMenuItem;
             this.편집EcontextMenuStrip.Size = new System.Drawing.Size(171, 88);
             this.편집EcontextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.편집EcontextMenuStrip_ItemClicked);
             // 
@@ -182,6 +184,12 @@ namespace DarkNotepad
             this.찾기FtoolStripMenuItem.Name = "찾기FtoolStripMenuItem";
             this.찾기FtoolStripMenuItem.Size = new System.Drawing.Size(170, 28);
             this.찾기FtoolStripMenuItem.Text = "찾기(&F)";
+            // 
+            // 바꾸기RtoolStripMenuItem1
+            // 
+            this.바꾸기RtoolStripMenuItem1.Name = "바꾸기RtoolStripMenuItem1";
+            this.바꾸기RtoolStripMenuItem1.Size = new System.Drawing.Size(170, 28);
+            this.바꾸기RtoolStripMenuItem1.Text = "바꾸기(&R)";
             // 
             // 서식OtoolStripMenuItem
             // 
@@ -283,16 +291,12 @@ namespace DarkNotepad
             this.label1.TabIndex = 6;
             this.label1.Text = "label1";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label1.UseWaitCursor = true;
             this.label1.Visible = false;
-            // 
-            // 바꾸기RtoolStripMenuItem1
-            // 
-            this.바꾸기RtoolStripMenuItem1.Name = "바꾸기RtoolStripMenuItem1";
-            this.바꾸기RtoolStripMenuItem1.Size = new System.Drawing.Size(170, 28);
-            this.바꾸기RtoolStripMenuItem1.Text = "바꾸기(&R)";
             // 
             // Form1
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
@@ -305,6 +309,7 @@ namespace DarkNotepad
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.UseWaitCursor = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.menuStrip.ResumeLayout(false);

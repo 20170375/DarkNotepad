@@ -13,8 +13,12 @@ namespace DarkNotepad
         {
             InitializeComponent();
 
-            reset();
+            resetFileInfo();
             setup();
+
+            richTextBox1.AllowDrop = true;
+            richTextBox1.DragEnter += new DragEventHandler(richTextBox1_DragEnter);
+            richTextBox1.DragDrop += new DragEventHandler(richTextBox1_DragDrop);
         }
         public Form1(string[] args) : this()
         {
@@ -40,7 +44,7 @@ namespace DarkNotepad
             if (label1.Visible == true) { richTextBox1.Height -= label1.Height; }
         }
 
-        private void reset()
+        private void resetFileInfo()
         {
             this.Text = "Untitled";
             richTextBox1.Text = null;
@@ -55,6 +59,7 @@ namespace DarkNotepad
             using (StreamReader reader = new StreamReader(path))
             {
                 fileName = path.Split("\\").Last();
+                filePath = path.Replace(fileName, "");
                 richTextBox1.Text = reader.ReadToEnd();
                 richTextBox1.Select(0, 0);
                 reader.Close();
@@ -168,9 +173,9 @@ namespace DarkNotepad
 
                 if (drg == DialogResult.Yes)
                 {
-                    if (saveFile() == true) { reset(); }
+                    if (saveFile() == true) { resetFileInfo(); }
                 }
-                else if (drg == DialogResult.No) { reset(); }
+                else if (drg == DialogResult.No) { resetFileInfo(); }
                 else { }
             }
             else if (e.ClickedItem == 새창WtoolStripMenuItem) { Process.Start("DarkNotepad.exe"); }
@@ -308,5 +313,28 @@ namespace DarkNotepad
         }
 
         private void richTextBox1_SelectionChanged(object sender, EventArgs e) { stateUpdate(); }
+        string selection;
+        private void richTextBox1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) { e.Effect = DragDropEffects.Copy; }
+        }
+
+        private void richTextBox1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            if (fileData != richTextBox1.Text)
+            {
+                DialogResult drg = MessageBox.Show("Save before open?", "Notepad",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
+
+                if (drg == DialogResult.Yes) { quickSaveFile(); }
+                else if (drg == DialogResult.No) { }
+                else { return; }
+            }
+            quickOpenFile(files[0]);
+        }
     }
 }
