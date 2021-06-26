@@ -83,7 +83,6 @@ namespace DarkNotepad
             this.menuStrip.Size = new System.Drawing.Size(633, 31);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
-            this.menuStrip.UseWaitCursor = true;
             // 
             // 파일FtoolStripMenuItem
             // 
@@ -270,6 +269,7 @@ namespace DarkNotepad
             this.richTextBox1.AutoWordSelection = true;
             this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.richTextBox1.Font = new System.Drawing.Font("맑은 고딕", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.richTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(212)))), ((int)(((byte)(212)))));
             this.richTextBox1.Location = new System.Drawing.Point(41, 64);
@@ -291,7 +291,6 @@ namespace DarkNotepad
             this.label1.TabIndex = 6;
             this.label1.Text = "label1";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.UseWaitCursor = true;
             this.label1.Visible = false;
             // 
             // Form1
@@ -309,7 +308,6 @@ namespace DarkNotepad
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.UseWaitCursor = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.menuStrip.ResumeLayout(false);

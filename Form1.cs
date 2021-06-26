@@ -313,7 +313,7 @@ namespace DarkNotepad
         }
 
         private void richTextBox1_SelectionChanged(object sender, EventArgs e) { stateUpdate(); }
-        string selection;
+        
         private void richTextBox1_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) { e.Effect = DragDropEffects.Copy; }
